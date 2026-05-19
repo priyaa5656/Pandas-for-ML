@@ -86,7 +86,7 @@ Meaning: “Display the entire table on the screen.”
 ```python
 print(df.head())
 ```
-Displays the first 5 rows.
+Displays the first 5 rows or what you want.
 
 ### df.info() :
 Data information is given:
@@ -134,12 +134,17 @@ Meaning: “Give the name of the first row.”
 ```python
 print(df.iloc[0, 1])
 ```
-
 Meaning
 Part	Meaning
 iloc	position based
 0	first row
 1	second column
+
+And 
+```python
+print(df.iloc[: , [0, 3, 7]])
+```
+
 
 
 ## Row + column position
@@ -241,6 +246,77 @@ Meaning: Highest marks.
 print(df["Marks"].min())
 ```
 Meaning: Lowest marks.
+
+
+# read_csv()
+Used to load CSV files into a Pandas DataFrame.
+Example:
+```python
+data = pd.read_csv('students.csv')
+print(data)
+```
+
+
+## type()
+This checks what type of object the data is. 🧠
+```python
+type(data)   #Output: <class 'pandas.core.frame.DataFrame'>
+```
+
+Example 🧠
+```python
+x = 10
+print(type(x))     # Output: <class 'int'>
+```
+
+## shape
+Used to get the number of rows and columns in a DataFrame.
+```python
+print(data.shape)    #Output: (rows, columns)
+```
+
+Example :
+```python
+🔥 If data:
+Name	Marks
+Suraj	95
+Aman	80
+Riya	90
+print(data.shape)
+```
+Output: (3, 2)  -->  beacause:- 3 rows ,  2 columns
+
+## Fetching Data
+
+### Single 
+```python
+data['Name']
+```
+### Multiple columns or rows
+```python
+print(data[['City' , 'Email'  , 'Grade']])
+```
+
+### Specific Row
+```python
+data.iloc[0]
+```
+
+### Specific Row and Column
+```python
+data.loc[0, 'Name']
+```
+
+### Index Based Fetching
+```python
+data.iloc[0, 1]
+```
+
+
+
+
+
+
 
 
 
