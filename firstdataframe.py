@@ -1,4 +1,5 @@
 import pandas as pd
+from sympy import python
 
 data = {
     "Name": ["Suraj", "Aman", "Rohit"],
@@ -42,6 +43,7 @@ print(df.iloc[: , [0, 3, 7]])
 print(df[df["Age"] > 20])
 
 #City == Delhi
+print(df["City"] == "Delhi")
 print(df[df["City"] == "Delhi"])
 
 #Multiple Conditions
@@ -99,6 +101,10 @@ print(data['City'])
 #or Multiple columns or rows fetching
 print(data[['City' , 'Email'  , 'Grade']])
 
+# Multiple Conditions with Masks
+mask1 = data['City'] == 'Delhi'
+mask2 = data['Grade'] == 'A+'
+print(data[mask1 & mask2])
 
 ### Specific Row
 print(data.iloc[0])
@@ -108,6 +114,85 @@ print(data.loc[0, 'Name'])
 
 ### Index Based Fetching
 print(data.iloc[0, 1])
+
+## value_counts() 🔥
+## Example
+data['City'].value_counts()
+
+
+
+## Find Count of Specific Value
+### Using Filtering
+data[data['City'] == 'Delhi'].shape[0]
+
+#OR 
+
+### Using value_counts()
+data['City'].value_counts()['Delhi']
+
+
+
+## plot() Function
+
+### Line Plot
+data['Marks'].plot(kind='line')
+
+### Bar Plot and Barh plot
+data['Marks'].plot(kind='bar')
+
+### Pie Chart
+data['Grade'].value_counts().plot(kind='pie')
+
+### Important Functions
+plt.title()
+plt.xlabel()
+plt.ylabel()
+plt.show()
+
+
+#Example:
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('students.csv')
+data['Marks'].plot(kind='pie')
+plt.title("Students Marks")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.show()
+
+#OR you use if you want head 5 row only .. 
+data['Marks'].head().plot(kind='line')
+
+# Series Values
+series = data['Course'].value_counts()
+
+## Get Values
+series.values
+
+## Get Index
+series.index
+
+#Example:
+series = data['Course'].value_counts()
+print(series.values)
+print(series.index)
+
+# Access Specific Value from Series
+series = data['Course'].value_counts()
+
+## Example
+series['BCA']
+
+
+
+
+
+
+
+
+
+
+
 
 
 

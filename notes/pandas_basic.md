@@ -167,6 +167,7 @@ Meaning: “Show only those rows where the age is greater than 20.”
 
 ### City == Delhi
 ```python
+print(df["City"] == "Delhi")
 print(df[df["City"] == "Delhi"])
 ```
 Meaning:“Show only those rows where the city is Delhi.”
@@ -176,6 +177,43 @@ Meaning:“Show only those rows where the city is Delhi.”
 print(df[(df["Age"] > 20) & (df["City"] == "Delhi")])
 ```
 Meaning: “Show only those rows where the age is greater than 20 AND the city is Delhi.”
+
+# Function with Filtering
+## Example
+```python
+data = pd.read_csv('students.csv')
+
+def get_city_match_count(city):
+    mask = data['City'] == city
+    return data[mask].shape[0]
+
+print(get_city_match_count('Delhi'))
+```
+## Explanation
+- `mask` stores True/False values.
+- `data[mask]` filters matching rows.
+- `.shape[0]` returns the number of rows.
+
+## Multiple Conditions with Masks
+
+### Creating Masks
+
+mask1 = data['City'] == 'Delhi'
+
+mask2 = data['Grade'] == 'A+'
+
+### Using Multiple Conditions
+
+data[mask1 & mask2]
+
+### Explanation
+
+- `mask1` checks rows where City is Delhi.
+- `mask2` checks rows where Grade is A+.
+- `&` means AND condition.
+- Only rows matching both conditions are returned.
+
+
 
 
 ## 8. Sorting Data 📈
@@ -310,6 +348,124 @@ data.loc[0, 'Name']
 ### Index Based Fetching
 ```python
 data.iloc[0, 1]
+```
+
+
+## value_counts() 🔥
+Usage of value_counts():
+It is used to count how many times each value appears in a specific column. 😄
+
+## Example
+```python
+data['City'].value_counts()
+```
+## Output Example
+
+Delhi     2
+Mumbai    1
+Meerut    1
+
+## Find Count of Specific Value
+### Using Filtering
+```python
+data[data['City'] == 'Delhi'].shape[0]
+```
+
+OR 
+
+### Using value_counts()
+```python
+data['City'].value_counts()['Delhi']
+```
+
+
+## plot() Function
+```python
+Used for data visualization.
+```
+
+### Line Plot
+```python
+data['Marks'].plot(kind='line')
+```
+
+### Bar Plot and Barh plot
+```python
+data['Marks'].plot(kind='bar')
+```
+
+### Pie Chart
+```python
+data['Grade'].value_counts().plot(kind='pie')
+```
+
+### Important Functions
+```python
+plt.title()
+plt.xlabel()
+plt.ylabel()
+plt.show()
+```
+
+
+Example:
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('students.csv')
+data['Marks'].plot(kind='pie')
+plt.title("Students Marks")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.show()
+
+#OR you use if you want head 5 row only .. 
+data['Marks'].head().plot(kind='line')
+```
+
+# Series Values
+```python
+series = data['Course'].value_counts()
+```
+
+## Get Values
+This will only return the count values! 😄🔥
+```python
+print(series.values)
+#important function 
+print(series.head)
+print(series.tail)
+```
+
+## Get Index
+This will only return the count index! 😄🔥
+```python
+print(series.index)
+```
+
+Example:
+```python
+data = pd.read_csv('students.csv')
+series = data['Course'].value_counts()
+print(series.values)
+print(series.index)
+```
+
+# Access Specific Value from Series
+Purpose :Returns count of a specific value from the Series.
+
+```python
+series = data['Course'].value_counts()
+series['BCA']
+
+```
+
+## Example
+```python
+import pandas as pd
+data = pd.read_csv('students.csv')
+series = data['Course'].value_counts()
+print(series['BCA'])
 ```
 
 
