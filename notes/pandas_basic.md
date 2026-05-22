@@ -229,6 +229,66 @@ print(df.sort_values("Age", ascending=False))
 ```
 Meaning:The oldest at the top.
 
+## Multiple Columns
+```python
+data.sort_values(['City', 'Age'])
+```
+
+## inplace=True
+```python
+data.sort_values('City', inplace=True)
+```
+
+Example:
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    'Name': ['Suraj', 'Aman', 'Riya', 'Tina'],
+    'City': ['Delhi', 'Delhi', 'Mumbai', 'Chennai'],
+    'Age': [20, 25, 21, 22]
+})
+
+print(data)
+
+new_data=data.sort_values(
+    ['City', 'Age'],
+    ascending=False
+)
+
+print(new_data)
+
+
+new_data=data.sort_values(
+    ['City', 'Age'],
+    ascending=[True, False]
+)
+
+print(new_data)
+```
+
+
+Example: 
+```python
+ import pandas as pd
+
+df = pd.DataFrame({
+    'Name': ['Suraj', 'Aman', 'Riya'],
+    'Age': [22, 20, 21]
+})
+
+print(df.sort_values("Age"))
+```
+
+Output 😎
+Name	Age
+Aman	20
+Riya	21
+Suraj	22
+
+ascending=True ,  Means :small → big,  A → Z
+ascending=False , Means: big → small ,  Z → A
+
 
 ## 9. Handling Missing Values ​​🚨
 
@@ -322,7 +382,7 @@ Aman	80
 Riya	90
 print(data.shape)
 ```
-Output: (3, 2)  -->  beacause:- 3 rows ,  2 columns
+Output: (3, 2)  -->  because:- 3 rows ,  2 columns
 
 ## Fetching Data
 
@@ -380,7 +440,9 @@ data['City'].value_counts()['Delhi']
 
 
 ## plot() Function
+
 ```python
+import matplotlib.pyplot as plt
 Used for data visualization.
 ```
 
@@ -423,6 +485,31 @@ plt.show()
 data['Marks'].head().plot(kind='line')
 ```
 
+
+## unique() and nunique()
+These are SUPER important 😄
+
+## unique()
+```python
+data['City'].unique()
+```
+Returns unique values.
+
+## nunique()
+```python
+data['City'].nunique()
+```
+Returns count of unique values.
+
+
+## dtypes 😎
+SUPER IMPORTANT for ML.
+```python
+print(df.dtypes)
+```
+Shows datatype of every column.
+
+
 ## Series Values
 ```python
 series = data['Course'].value_counts()
@@ -433,8 +520,8 @@ This will only return the count values! 😄🔥
 ```python
 print(series.values)
 #important function 
-print(series.head)
-print(series.tail)
+print(series.head())
+print(series.tail())
 ```
 
 ### Get Index

@@ -1,5 +1,4 @@
 import pandas as pd
-from sympy import python
 
 data = {
     "Name": ["Suraj", "Aman", "Rohit"],
@@ -87,7 +86,7 @@ data = pd.read_csv('students.csv')
 print(data)
 
 #type()  ---> This checks what type of object the data is. 🧠
-type(data)
+print(type(data))
 
 ## shape
 # Used to get the number of rows and columns in a DataFrame.
@@ -117,7 +116,7 @@ print(data.iloc[0, 1])
 
 ## value_counts() 🔥
 ## Example
-data['City'].value_counts()
+print(data['City'].value_counts())
 
 
 
@@ -128,13 +127,14 @@ data[data['City'] == 'Delhi'].shape[0]
 #OR 
 
 ### Using value_counts()
-data['City'].value_counts()['Delhi']
+print(data['City'].value_counts()['Delhi'])
 
 
 
 ## plot() Function
 
 ### Line Plot
+import matplotlib.pyplot as plt
 data['Marks'].plot(kind='line')
 
 ### Bar Plot and Barh plot
@@ -163,14 +163,25 @@ plt.show()
 #OR you use if you want head 5 row only .. 
 data['Marks'].head().plot(kind='line')
 
+
+
+# unique()
+print(data['City'].unique())
+# nunique()
+print(data['City'].nunique())
+
+#types 😎
+print(df.dtypes)
+
+
 # Series Values
 series = data['Course'].value_counts()
 
 ## Get Values
-series.values
+print(series.values)
 
 ## Get Index
-series.index
+print(series.index)
 
 #Example:
 series = data['Course'].value_counts()
@@ -210,27 +221,69 @@ print(s1 + s2)
 data.drop_duplicates(subset=['City'])
 
 #Example:
+import pandas as pd
+
+
 data = pd.DataFrame({
-    'Name': ['Suraj', 'Aman', 'Riya'],
-    'City': ['Delhi', 'Delhi', 'Mumbai']
+    'Name': ['Suraj', 'Aman', 'Riya', 'Karan' , 'Tina', 'Riya'],
+    'City': ['Delhi', 'Delhi', 'Mumbai', 'goa', 'Chennai' , 'Delhi'],
+    'Age': [20, 25, 21, 20, 22 , 20]
 })
 
 print("Original Data:\n")
 print(data)
+print(data.shape)
+
 
 # WITHOUT inplace
 new_data = data.drop_duplicates(subset=['City'])
-
 print("\nNew Data:\n")
 print(new_data)
 
+print("\nShape After Removing Duplicates:\n")
+print(data.drop_duplicates(subset=['City']).shape)
+#or 
+print(new_data.shape)
+
+
 print("\nOriginal Data Still Same:\n")
 print(data)
+print(data.shape) 
+
 
 # WITH inplace
 new_data= data.drop_duplicates(subset=['City'], inplace=True)
+print("\n no new data returned:\n")
+print(new_data) 
 
-print("\nOriginal Data After inplace=True:\n")
+print("\noriginal data after inplace=true:\n")
 print(data)
+print(data.shape)
+
+
+print("\nNext step is multiple columns\n")
+
+
+# WITHOUT inplace
+new_data = data.drop_duplicates( subset=['City', 'Age'])
+print("\nAfter Removing Duplicates:\n")
 print(new_data)
+print(new_data.shape)
+
+# WITH inplace
+new_data= data.drop_duplicates(subset=['City' , 'Age'], inplace=True)
+print("\n no new data returned:\n")
+print(new_data) 
+
+print("\noriginal data after inplace=true:\n")
+print(data)
+print(data.shape)
+
+
+print("\nKeep Last Duplicate:\n")
+new_data=(data.drop_duplicates(subset=['City', 'Age'],keep='last'))
+print()
+print(new_data.shape)
+
+
 
