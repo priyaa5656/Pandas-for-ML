@@ -178,8 +178,8 @@ print(df[(df["Age"] > 20) & (df["City"] == "Delhi")])
 ```
 Meaning: “Show only those rows where the age is greater than 20 AND the city is Delhi.”
 
-# Function with Filtering
-## Example
+## Function with Filtering
+### Example
 ```python
 data = pd.read_csv('students.csv')
 
@@ -189,7 +189,7 @@ def get_city_match_count(city):
 
 print(get_city_match_count('Delhi'))
 ```
-## Explanation
+ Explanation
 - `mask` stores True/False values.
 - `data[mask]` filters matching rows.
 - `.shape[0]` returns the number of rows.
@@ -286,7 +286,7 @@ print(df["Marks"].min())
 Meaning: Lowest marks.
 
 
-# read_csv()
+## read_csv()
 Used to load CSV files into a Pandas DataFrame.
 Example:
 ```python
@@ -423,12 +423,12 @@ plt.show()
 data['Marks'].head().plot(kind='line')
 ```
 
-# Series Values
+## Series Values
 ```python
 series = data['Course'].value_counts()
 ```
 
-## Get Values
+### Get Values
 This will only return the count values! 😄🔥
 ```python
 print(series.values)
@@ -437,7 +437,7 @@ print(series.head)
 print(series.tail)
 ```
 
-## Get Index
+### Get Index
 This will only return the count index! 😄🔥
 ```python
 print(series.index)
@@ -451,7 +451,7 @@ print(series.values)
 print(series.index)
 ```
 
-# Access Specific Value from Series
+## Access Specific Value from Series
 Purpose :Returns count of a specific value from the Series.
 
 ```python
@@ -460,13 +460,257 @@ series['BCA']
 
 ```
 
-## Example
+### Example
 ```python
 import pandas as pd
 data = pd.read_csv('students.csv')
 series = data['Course'].value_counts()
 print(series['BCA'])
 ```
+
+Real Use Cases 🔥
+✅ Specific category count
+✅ Frequency lookup
+✅ Data analysis
+✅ Visualization
+
+
+Example:
+```python
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([1, 2, 3], index=['B', 'C', 'D'])
+print(s1 + s2)
+```
+👉 The order doesn't matter 😎
+👉 The index label matters.
+
+
+Example 2 🔥 Same Index Different Order
+```python
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([2, 1, 3], index=['B', 'A', 'C'])
+print(s1 + s2)
+```
+Output 😅
+A    11
+B    22
+C    33
+
+
+Example 3 ❌ Different Index
+```python
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([1, 2, 3], index=['X', 'Y', 'Z'])
+print(s1 + s2)
+```
+Output 😅
+A   NaN
+B   NaN
+C   NaN
+X   NaN
+Y   NaN
+Z   NaN
+
+Example 5 😎 Numeric Index
+```python
+s1 = pd.Series([5, 6, 7], index=[1, 2, 3])
+s2 = pd.Series([10, 20, 30], index=[2, 1, 4])
+print(s1 + s2)
+```
+Output 🚀
+1    25.0
+2    16.0
+3     NaN
+4     NaN
+
+
+## inplace=True vs Without inplace
+
+## drop_duplicates() with subset Without inplace
+
+```python
+new_data = data.drop_duplicates()
+data.drop_duplicates(subset=['City'])
+```
+- Returns new DataFrame
+- Original data unchanged
+
+## With inplace=True
+```python
+data.drop_duplicates(inplace=True)
+```
+- Modifies original DataFrame
+- Returns None
+
+### Purpose
+Removes duplicate rows based on specific columns.
+
+### Important
+Column names must be inside quotes.
+
+Example :
+```python
+import pandas as pd
+
+
+data = pd.DataFrame({
+    'Name': ['Suraj', 'Aman', 'Riya', 'Karan' , 'Tina', 'Riya'],
+    'City': ['Delhi', 'Delhi', 'Mumbai', 'goa', 'Chennai' , 'Delhi'],
+    'Age': [20, 25, 21, 20, 22 , 20]
+})
+
+print("Original Data:\n")
+print(data)
+print(data.shape)
+
+
+# WITHOUT inplace
+new_data = data.drop_duplicates(subset=['City'])
+print("\nNew Data:\n")
+print(new_data)
+
+print("\nShape After Removing Duplicates:\n")
+print(data.drop_duplicates(subset=['City']).shape)
+#or 
+print(new_data.shape)
+
+
+print("\nOriginal Data Still Same:\n")
+print(data)
+print(data.shape) 
+
+
+# WITH inplace
+new_data= data.drop_duplicates(subset=['City'], inplace=True)
+print("\n no new data returned:\n")
+print(new_data) 
+
+print("\noriginal data after inplace=true:\n")
+print(data)
+print(data.shape)
+print("\nNext step is multiple columns\n")
+```
+
+
+```python 
+data = pd.DataFrame({
+    'Name': ['Suraj', 'Aman', 'Riya', 'Karan' , 'Tina', 'Riya'],
+    'City': ['Delhi', 'Delhi', 'Mumbai', 'goa', 'Chennai' , 'Delhi'],
+    'Age': [20, 25, 21, 20, 22 , 20]
+})
+
+
+# WITHOUT inplace
+new_data = data.drop_duplicates( subset=['City', 'Age'])
+print("\nAfter Removing Duplicates:\n")
+print(new_data)
+print(new_data.shape)
+
+# WITH inplace
+new_data= data.drop_duplicates(subset=['City' , 'Age'], inplace=True)
+print("\n no new data returned:\n")
+print(new_data) 
+
+print("\noriginal data after inplace=true:\n")
+print(data)
+print(data.shape)
+
+
+print("\nKeep Last Duplicate:\n")
+new_data=(data.drop_duplicates(subset=['City', 'Age'],keep='last'))
+print()
+print(new_data.shape)
+```
+
+
+### Visualization 🧠
+WITHOUT inplace
+Original Data ---> unchanged
+             \
+              ---> New Cleaned Copy
+WITH inplace=True
+Original Data ---> directly modified
+no new copy return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

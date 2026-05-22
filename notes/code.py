@@ -183,16 +183,54 @@ series = data['Course'].value_counts()
 ## Example
 series['BCA']
 
+#Example:
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([1, 2, 3], index=['B', 'C', 'D'])
+print(s1 + s2)
 
 
+#Example:
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([2, 1, 3], index=['B', 'A', 'C'])
+print(s1 + s2)
 
 
+#Example:
+s1 = pd.Series([10, 20, 30], index=['A', 'B', 'C'])
+s2 = pd.Series([1, 2, 3], index=['X', 'Y', 'Z'])
+print(s1 + s2)
+
+#Example:
+s1 = pd.Series([5, 6, 7], index=[1, 2, 3])
+s2 = pd.Series([10, 20, 30], index=[2, 1, 4])
+print(s1 + s2)
 
 
+# drop_duplicates() with subset
+data.drop_duplicates(subset=['City'])
 
+#Example:
+data = pd.DataFrame({
+    'Name': ['Suraj', 'Aman', 'Riya'],
+    'City': ['Delhi', 'Delhi', 'Mumbai']
+})
 
+print("Original Data:\n")
+print(data)
 
+# WITHOUT inplace
+new_data = data.drop_duplicates(subset=['City'])
 
+print("\nNew Data:\n")
+print(new_data)
 
+print("\nOriginal Data Still Same:\n")
+print(data)
 
+# WITH inplace
+new_data= data.drop_duplicates(subset=['City'], inplace=True)
+
+print("\nOriginal Data After inplace=True:\n")
+print(data)
+print(new_data)
 
