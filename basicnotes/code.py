@@ -221,7 +221,6 @@ print(s1 + s2)
 data.drop_duplicates(subset=['City'])
 
 #Example:
-import pandas as pd
 
 
 data = pd.DataFrame({
