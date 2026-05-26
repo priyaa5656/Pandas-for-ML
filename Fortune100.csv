@@ -1,0 +1,101 @@
+Index,Rank,Title,Employees,Sector,Industry,Headquarters,Revenue_Billion_USD,Profit_Billion_USD
+0,1,Walmart,2100000,Retail,Retailing,Bentonville Arkansas USA,648.1,15.5
+1,2,Amazon,1525000,Technology,E-Commerce,Seattle Washington USA,574.8,30.4
+2,3,Apple,161000,Technology,Consumer Electronics,Cupertino California USA,383.3,97.0
+3,4,Berkshire Hathaway,396500,Financials,Insurance,Omaha Nebraska USA,364.5,96.2
+4,5,CVS Health,259500,Healthcare,Pharmacy Services,Woonsocket Rhode Island USA,357.8,8.3
+5,6,Exxon Mobil,62000,Energy,Oil and Gas,Irving Texas USA,344.6,36.0
+6,7,Alphabet,182000,Technology,Internet Services,Mountain View California USA,307.4,73.8
+7,8,McKesson,48000,Healthcare,Medical Distribution,Irving Texas USA,309.0,3.0
+8,9,Cencora,42000,Healthcare,Drug Distribution,Conshohocken Pennsylvania USA,262.2,1.8
+9,10,Costco,333000,Retail,Wholesale Retail,Issaquah Washington USA,242.3,6.3
+10,11,JPMorgan Chase,309000,Financials,Banking,New York New York USA,239.4,49.6
+11,12,Ford Motor,177000,Automotive,Automobiles,Dearborn Michigan USA,176.2,4.3
+12,13,General Motors,163000,Automotive,Automobiles,Detroit Michigan USA,171.8,10.1
+13,14,Chevron,45700,Energy,Oil and Gas,San Ramon California USA,200.9,21.4
+14,15,Cigna,73500,Healthcare,Insurance,Bloomfield Connecticut USA,195.3,5.4
+15,16,Microsoft,221000,Technology,Software,Redmond Washington USA,211.9,72.4
+16,17,Home Depot,470000,Retail,Home Improvement,Atlanta Georgia USA,152.7,15.1
+17,18,Kroger,414000,Retail,Supermarkets,Cincinnati Ohio USA,150.0,2.2
+18,19,Cardinal Health,48500,Healthcare,Medical Distribution,Dublin Ohio USA,205.0,0.3
+19,20,Verizon,105400,Telecom,Telecommunications,New York New York USA,134.0,11.6
+20,21,Tesla,140000,Automotive,Electric Vehicles,Austin Texas USA,96.7,15.0
+21,22,Meta Platforms,67300,Technology,Social Media,Menlo Park California USA,134.9,39.1
+22,23,PepsiCo,318000,Consumer Goods,Beverages and Snacks,Purchase New York USA,91.5,9.1
+23,24,Coca-Cola,79100,Consumer Goods,Beverages,Atlanta Georgia USA,45.8,10.7
+24,25,Intel,124800,Technology,Semiconductors,Santa Clara California USA,54.2,-2.0
+25,26,IBM,282000,Technology,IT Services,Armonk New York USA,61.9,7.5
+26,27,Nike,83700,Consumer Goods,Apparel and Footwear,Beaverton Oregon USA,51.2,5.1
+27,28,Starbucks,381000,Retail,Coffeehouse,Seattle Washington USA,36.0,4.1
+28,29,Boeing,171000,Aerospace,Aerospace and Defense,Arlington Virginia USA,77.8,-2.2
+29,30,Netflix,14000,Technology,Streaming Services,Los Gatos California USA,33.7,5.4
+30,31,Oracle,164000,Technology,Cloud Computing,Austin Texas USA,50.0,8.5
+31,32,Cisco,84900,Technology,Networking,San Jose California USA,57.0,12.6
+32,33,Adobe,29400,Technology,Software,San Jose California USA,19.4,5.4
+33,34,Salesforce,72600,Technology,Cloud Software,San Francisco California USA,34.8,4.1
+34,35,Uber,30400,Technology,Ride Sharing,San Francisco California USA,37.2,1.9
+35,36,Airbnb,7300,Technology,Hospitality Tech,San Francisco California USA,9.9,4.8
+36,37,PayPal,27000,Financials,Digital Payments,San Jose California USA,29.7,4.2
+37,38,Mastercard,33400,Financials,Payment Processing,Purchase New York USA,25.1,11.2
+38,39,Visa,28800,Financials,Payment Processing,Foster City California USA,32.7,17.3
+39,40,Goldman Sachs,45300,Financials,Investment Banking,New York New York USA,46.3,8.5
+40,41,Morgan Stanley,82000,Financials,Investment Banking,New York New York USA,54.1,9.1
+41,42,American Express,74700,Financials,Credit Services,New York New York USA,60.5,8.4
+42,43,Pfizer,88000,Healthcare,Pharmaceuticals,New York New York USA,58.5,2.1
+43,44,Johnson and Johnson,131900,Healthcare,Pharmaceuticals,New Brunswick New Jersey USA,85.2,17.9
+44,45,Merck,73000,Healthcare,Pharmaceuticals,Rahway New Jersey USA,60.1,14.5
+45,46,Moderna,5800,Healthcare,Biotechnology,Cambridge Massachusetts USA,6.8,-4.7
+46,47,AbbVie,50000,Healthcare,Biopharma,North Chicago Illinois USA,54.3,4.9
+47,48,UnitedHealth Group,440000,Healthcare,Health Insurance,Minnetonka Minnesota USA,371.6,22.4
+48,49,Humana,65000,Healthcare,Health Insurance,Louisville Kentucky USA,106.4,2.5
+49,50,Anthem,98000,Healthcare,Health Insurance,Indianapolis Indiana USA,171.3,6.0
+50,51,Dell Technologies,133000,Technology,Computer Hardware,Round Rock Texas USA,88.4,3.2
+51,52,HP,58000,Technology,Computer Hardware,Palo Alto California USA,53.7,3.1
+52,53,Lenovo,77000,Technology,Computer Hardware,Beijing China,61.9,1.6
+53,54,Sony,113000,Technology,Electronics,Tokyo Japan,88.3,6.9
+54,55,Samsung Electronics,267000,Technology,Electronics,Suwon South Korea,200.7,22.4
+55,56,Toyota,375000,Automotive,Automobiles,Toyota City Japan,312.0,34.2
+56,57,Honda,197000,Automotive,Automobiles,Tokyo Japan,129.5,6.4
+57,58,BMW,149000,Automotive,Luxury Vehicles,Munich Germany,168.0,12.4
+58,59,Mercedes-Benz,166000,Automotive,Luxury Vehicles,Stuttgart Germany,161.2,14.8
+59,60,Volkswagen,684000,Automotive,Automobiles,Wolfsburg Germany,348.4,18.1
+60,61,Hyundai,120000,Automotive,Automobiles,Seoul South Korea,120.0,7.2
+61,62,Shell,96000,Energy,Oil and Gas,London UK,323.2,19.4
+62,63,BP,87000,Energy,Oil and Gas,London UK,213.0,9.6
+63,64,TotalEnergies,102000,Energy,Oil and Gas,Paris France,237.1,21.3
+64,65,Siemens,311000,Industrial,Engineering,Munich Germany,83.0,9.2
+65,66,General Electric,125000,Industrial,Industrial Equipment,Boston Massachusetts USA,68.0,9.5
+66,67,3M,85000,Industrial,Conglomerate,Saint Paul Minnesota USA,32.7,5.8
+67,68,Caterpillar,113000,Industrial,Heavy Equipment,Irving Texas USA,67.1,10.3
+68,69,Deere and Company,82000,Industrial,Agricultural Equipment,Moline Illinois USA,61.2,10.1
+69,70,FedEx,446000,Logistics,Shipping,Memphis Tennessee USA,87.7,4.3
+70,71,UPS,500000,Logistics,Shipping,Atlanta Georgia USA,91.0,6.7
+71,72,DHL,594000,Logistics,Shipping,Bonn Germany,101.0,5.2
+72,73,Target,440000,Retail,Department Stores,Minneapolis Minnesota USA,107.4,4.1
+73,74,Best Buy,85000,Retail,Electronics Retail,Richfield Minnesota USA,43.5,1.5
+74,75,IKEA,231000,Retail,Furniture Retail,Delft Netherlands,47.6,2.1
+75,76,Zara,174000,Retail,Fashion Retail,Arteixo Spain,38.6,5.3
+76,77,H&M,107000,Retail,Fashion Retail,Stockholm Sweden,22.3,1.1
+77,78,Adidas,59000,Consumer Goods,Sportswear,Herzogenaurach Germany,24.7,1.0
+78,79,Puma,21000,Consumer Goods,Sportswear,Herzogenaurach Germany,9.1,0.5
+79,80,Unilever,128000,Consumer Goods,Consumer Products,London UK,64.1,8.2
+80,81,Procter and Gamble,107000,Consumer Goods,Consumer Products,Cincinnati Ohio USA,82.0,14.7
+81,82,Nestle,270000,Consumer Goods,Food Products,Vevey Switzerland,104.5,12.2
+82,83,Mars,140000,Consumer Goods,Food Products,McLean Virginia USA,50.0,4.5
+83,84,Kraft Heinz,36000,Consumer Goods,Food Products,Chicago Illinois USA,27.4,2.9
+84,85,Mondelez,91000,Consumer Goods,Snacks,Chicago Illinois USA,36.0,4.9
+85,86,Disney,225000,Entertainment,Media and Entertainment,Burbank California USA,91.4,4.9
+86,87,Warner Bros Discovery,35000,Entertainment,Media and Entertainment,New York New York USA,41.3,-3.1
+87,88,Paramount Global,24000,Entertainment,Media and Entertainment,New York New York USA,29.7,-0.6
+88,89,Sony Pictures,18000,Entertainment,Film Production,Tokyo Japan,11.5,1.4
+89,90,Spotify,9200,Technology,Music Streaming,Stockholm Sweden,14.0,1.1
+90,91,Snapchat,5300,Technology,Social Media,Santa Monica California USA,4.6,-1.3
+91,92,Xiaomi,35000,Technology,Electronics,Beijing China,38.2,2.5
+92,93,Huawei,207000,Technology,Telecommunications,Shenzhen China,99.9,12.0
+93,94,Tencent,112000,Technology,Internet Services,Shenzhen China,86.2,16.8
+94,95,BYD,570000,Automotive,Electric Vehicles,Shenzhen China,84.7,4.2
+95,96,Infosys,317000,Technology,IT Services,Bengaluru India,18.6,3.1
+96,97,TCS,615000,Technology,IT Services,Mumbai India,29.1,5.6
+97,98,Wipro,245000,Technology,IT Services,Bengaluru India,11.2,1.5
+98,99,Accenture,743000,Technology,Consulting,Dublin Ireland,64.1,6.9
+99,100,Capgemini,340000,Technology,Consulting,Paris France,24.9,1.8
