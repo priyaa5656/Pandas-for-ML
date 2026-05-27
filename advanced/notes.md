@@ -325,7 +325,22 @@ Telecom           134.000000
 Financials        106.537500
 Technology         98.420690
 
+## TOTAL PROFIT TOP 5 SECTORS 🚀
+```python
+print(sector['Profit_Billion_USD'] .sum() .sort_values(ascending=False) .head(5))
+```
+Meaning 😄🔥
+Find out the total profit of every sector then sort from highest to lowest first show top 5
 
+
+## AVERAGE PROFIT TOP 5 SECTORS 😊
+```python
+print( sector['Profit_Billion_USD'] .mean() .sort_values(ascending=False) .head(5))
+```
+Meaning 🧠🔥
+Find out the average profit of every sectorthen sort from highest to lowestfirst show top 5
+
+🚀
 
 IMPORTANT 🏆
 Function	Meaning
@@ -334,4 +349,137 @@ sum()	total
 mean()	average
 max()	highest
 min()	lowest
+
+## Question based .:
+
+### 1️⃣ Sabse jyada revenue wali top 5 companies 😎
+```python
+print(company.sort_values('Revenue_Billion_USD',ascending=False)[['Title', 'Revenue_Billion_USD']].head(5))
+```
+
+### 2️⃣ Sabse jyada profit wali top 10 companies 🚀
+```python
+print(company.sort_values('Profit_Billion_USD',ascending=False)[['Title', 'Profit_Billion_USD']].head(10))
+```
+
+### 3️⃣ Kis sector mein sabse jyada companies hain 😄🔥
+```python
+print(sector.size().sort_values(ascending=False).head(1))
+```
+
+### 4️⃣ Har sector ki average revenue 🧠
+```python
+print(sector['Revenue_Billion_USD'].mean().sort_values(ascending=False))
+```
+
+### 5️⃣ Har sector ka total profit 😎🔥
+```python
+print(sector['Profit_Billion_USD'].sum().sort_values(ascending=False))
+```
+
+### 6️⃣ Sabse jyada employees wali company 🚀
+```python
+print(company.sort_values('Employees',ascending=False)[['Title', 'Employees']].head(1))
+```
+
+### 7️⃣ Loss mein chal rahi companies 😄
+```python
+print(company[company['Profit_Billion_USD'] < 0])
+```
+
+### 8️⃣ Technology sector ki companies 😎🔥
+```python
+print(sector.get_group('Technology'))
+```
+
+### 9️⃣ Har sector ki average employees 🧠🚀
+```python
+print(sector['Employees'].mean().sort_values(ascending=False))
+```
+
+### 🔟 Top 5 profitable sectors 😄🔥
+```python
+print(sector['Profit_Billion_USD'].sum().sort_values(ascending=False).head(5))
+```
+
+### 1️⃣1️⃣ Sabse kam revenue wali companies 😎
+```python
+print(company.sort_values('Revenue_Billion_USD')[['Title', 'Revenue_Billion_USD']].head(5))
+```
+
+### 1️⃣2️⃣ Har sector mein total employees 🚀
+```python
+print(sector['Employees'].sum().sort_values(ascending=False))
+```
+
+## MOST IMPORTANT PATTERN 🏆
+Goal|	Function
+Create Group|	groupby()
+Total|	sum()
+Average|	mean()
+Ranking|	sort_values()
+Top rows|	head()
+Filtering|	[]
+
+
+## Now we use new dataset delivery.csv 
+
+First Step 😎🔥
+Load CSV
+```python 
+import pandas as pd
+ipl = pd.read_csv('deliveries.csv')
+print(ipl.head())
+```
+
+IMPORTANT IPL QUESTIONS 🚀🏏
+
+### 1️⃣ Sabse jyada runs kis batsman ne banaye 😄
+Meaning 🧠🔥Total runs for each batsman, followed by the players with the highest runs.
+```python
+print(ipl.groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).head(10))
+```
+
+
+### 2️⃣ Sabse jyada fours 😎
+```python
+print(ipl[ipl['batsman_runs'] == 4].groupby('batsman').size().sort_values(ascending=False).head(10))
+Meaning 🚀Jab batsman_runs = 4 tabhi count karo
+```
+
+### 3️⃣ Sabse jyada sixes 🏏🔥
+```python
+print(ipl[ipl['batsman_runs'] == 6].groupby('batsman').size().sort_values(ascending=False).head(10))
+```
+
+### 4️⃣ Sabse jyada wickets 😎
+```python
+print(ipl['bowler'].value_counts().head(10))
+
+⚠️ Ye exact wickets nahi 😄Bas appearances count karta hai.
+Better wicket calculation 🚀
+print(ipl['player_dismissed'].value_counts().head(10))
+```
+
+
+### 5️⃣ Kis team ne sabse jyada runs banaye 😄🔥
+```python
+print(ipl.groupby('batting_team')['total_runs'].sum().sort_values(ascending=False))
+```
+
+### 6️⃣ Virat Kohli total runs 😎
+```python
+print(ipl[ipl['batsman'] == 'V Kohli']['batsman_runs'].sum())
+```
+
+### 7️⃣ MS Dhoni total sixes 🚀
+```python
+print(ipl[(ipl['batsman'] == 'MS Dhoni') &(ipl['batsman_runs'] == 6)].shape[0])
+
+
+
+
+
+
+
 
