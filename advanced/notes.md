@@ -454,11 +454,8 @@ print(ipl[ipl['batsman_runs'] == 6].groupby('batsman').size().sort_values(ascend
 
 ### 4️⃣ Sabse jyada wickets 😎
 ```python
-print(ipl['bowler'].value_counts().head(10))
+print(delivery['player_dismissed'].value_counts().head(10))
 
-⚠️ Ye exact wickets nahi 😄Bas appearances count karta hai.
-Better wicket calculation 🚀
-print(ipl['player_dismissed'].value_counts().head(10))
 ```
 
 
@@ -475,11 +472,246 @@ print(ipl[ipl['batsman'] == 'V Kohli']['batsman_runs'].sum())
 ### 7️⃣ MS Dhoni total sixes 🚀
 ```python
 print(ipl[(ipl['batsman'] == 'MS Dhoni') &(ipl['batsman_runs'] == 6)].shape[0])
+```
+
+## delivery.groupby
+Meaning :🧠🔥Create a separate group for each batsman.
+BUT output does not look useful 😄🔥 That's why usually after groupby:
+Function| Meaning
+.sum()  |total
+.mean() | average
+.size() |count
+.first()| first row
+.last() | last row
+
+
+Example: Total runs per batsman
+```python 
+print(delivery.groupby('batsman')['batsman_runs'].sum())
+```
+Example Output 🚀
+V Kohli |7263
+MS Dhoni| 5082
+RG Sharma| 6211
+
+## .get_group  (Fetching a specific group)
+Bring only Virat Kohli's rows
+```python
+runs = delivery.groupby('batsman')
+print(runs.get_group('V Kohli'))
+```
+
+## .shape
+```python
+runs = delivery.groupby('batsman')
+runs.get_group('V Kohli').shape        # (3494, 21)
+```
+
+output explain: 
+Step 1 Create every batsman's group 😄🏏
+groupby('batsman')
+
+Step 2 🚀👇Sirf:Virat Kohli's rows came out 🔥🔥
+get_group('V Kohli')
+
+
+Step 3 🧠How many rows and columns are there in the Virat Kohli group?
+.shape
+output:(rows, columns)
+
+
+## runs['batsman_runs'].sum()
+Meaning :Find out the total runs of each batsman
+```python
+runs = delivery.groupby('batsman')
+runs['batsman_runs'].sum()    # or group_name['column'].sum()
+```
+
+STEP-BY-STEP 🚀
+Step 1 😄Create a group of every batsman 🔥
+runs = delivery.groupby('batsman')
+
+Step 2 🚀Only runs column selected 😄🔥
+runs['batsman_runs']
+
+
+Step 3 👉Add runs of every batsman 🚀
+.sum()
+
+## Which batsman has scored the most runs?
+Calculate the total runs for all batsmen, then sort them from highest to lowest.
+Next, display the top 5 batsmen.
+
+```python
+print(
+runs['batsman_runs']
+.sum()
+.sort_values(ascending=False)
+.head()
+)
+```
+Output:
+batsman
+SK Raina    | 4548
+V Kohli     | 4423
+RG Sharma   | 4207
+G Gambhir   | 4132
+DA Warner   | 4014
 
 
 
+## Which batsman hit the most fours?
+Only take that ball on which the four is hit., then create Batsman-wise groups 🚀.How many fours did it take.then sort them from highest to lowest.Next, display the top 5 batsmen.
+
+```python
+print(
+ipl[ipl['batsman_runs'] == 4]
+.groupby('batsman')
+.size()
+.sort_values(ascending=False)
+.head(10)
+)
+```
+
+STEP-BY-STEP
+Step 1. Only take that ball on which the four is hit.
+ipl['batsman_runs'] == 4
+
+Step 2.Batsman-wise groups 🚀
+.groupby('batsman')
+
+Step 3. How many fours did it take 😄🔥
+.size()
+means:rows count
+
+Example 🏏
+batsman batsman_runs
+Virat |4
+Virat |4
+Rohit |4
+
+Output 🚀
+Virat |2
+Rohit |1
+IMPORTANT🧠
+
+## how many 4-run shots of every batsman. 
+```python
+new_delivery = delivery[delivery['batsman_runs'] == 4]
+
+print(new_delivery.groupby('batsman')['batsman_runs'].count().sort_values(ascending=False).head(10))
+```
+
+## Top 10 fours hitters:
+```python
+print(delivery.groupby('batsman')['batsman_runs'] ).count().sort_values(ascending=False) .head(10)
+```
+
+STEP-BY-STEP 🚀
+1️⃣only 4-run balls
+new_delivery
+👇
+
+2️⃣all batsman's group 😄🏏
+.groupby('batsman')
+
+3️⃣Runs column select 🚀
+['batsman_runs']
+
+4️⃣How many fours to kill?
+.count()
+
+Example 🧠
+Virat Group
+batsman_runs
+4
+4
+4
+count() = 3
+
+5️⃣Highest fours → lowest 😄
+.sort_values(ascending=False)
+
+6️⃣Top 10 batsmen 🚀
+.head(10)
 
 
 
+## 🆚 IMPORTANT DIFFERENCE (MOST IMP) 🔥
+.count() vs .size()
+Function|What does it count?
+.count()| only valid (non-null) values
+.size()| total rows (null also included)
 
+## we have to find Against which three teams has Virat Kohli scored the most runs?
+```python
+print(
+delivery[delivery['batsman'] == 'V Kohli']
+.groupby('bowling_team')['batsman_runs']
+.sum()
+.sort_values(ascending=False)
+.head(3)
+)
+```
+
+Explain:
+STEP-BY-STEP
+1️⃣only Virat Kohli rows 🔥
+delivery['batsman'] == 'V Kohli'
+
+2️⃣Opponent team-wise groups 🚀
+.groupby('bowling_team')
+
+Example 😄
+MI group
+CSK group
+KKR group
+
+3️⃣against total runs of all team
+['batsman_runs']
+.sum()
+
+4️⃣Highest runs → lowest 😊
+.sort_values(ascending=False)
+
+5️⃣Top 3 teams 🚀
+.head(3)
+
+
+## We create a function where we provide a batsman's name and, in return, receive information about the teams against which that batsman has scored the most runs.
+```python
+def run_scored(batsman_name):
+   vk = delivery[delivery['batsman'] == batsman_name]
+   return vk.groupby('bowling_team')['batsman_runs'] .sum() .sort_values(ascending=False) .index
+print(run_scored('V Kohli'))
+```
+
+STEP-BY-STEP 😄🔥
+1️⃣ Function: ➡Dynamic function 🚀Any batsman can use
+def run_scored(batsman_name):
+
+2️⃣ Filtering: Only us batsman's rows 🚀
+delivery['batsman'] == batsman_name
+
+3️⃣ Groupby : Opponent team-wise groups 😄
+.groupby('bowling_team')
+
+
+4️⃣ Sum :Total runs 🏏
+['batsman_runs'].sum()
+
+5️⃣ Sorting 🔥Highest → lowest 🚀
+.sort_values(ascending=False)
+
+6️⃣ .index 😄only team names 😊
+.index
+
+
+## 📘 Difference
+Function	Meaning
+groupby()	|groups create
+.get_group() |	specific group fetch
+.sum()|	total
+.count()	|non-null values count
+.size()|	total rows count
 
