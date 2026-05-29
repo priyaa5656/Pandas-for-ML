@@ -208,3 +208,36 @@ def run_scored(batsman_name):
 print(
     run_scored('V Kohli')
 )
+
+# ==============================
+# isin()
+# ==============================
+
+
+import pandas as pd
+df = pd.read_csv('data.csv')
+df['City'].isin(['Delhi', 'Pune'])
+
+
+# == ->only ONE value check 😄
+company['Sector'] == 'Technology'
+
+# isin() ->MULTIPLE values check 🚀
+company['Sector'].isin(['Technology', 'Retail'])
+
+#Fortune100 Example ->Technology + Retail Companies
+print(company[company['Sector'].isin(['Technology', 'Retail'])])
+
+#IPL Example -> Virat + Rohit Rows 😄
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])])
+
+
+## With groupby 😎🔥Virat + Rohit Total Runs
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])].groupby('batsman')['batsman_runs'].sum())
+
+
+## NOT isin() 
+print(company[~company['Sector'].isin(['Technology', 'Retail'])])
+0
+
+
