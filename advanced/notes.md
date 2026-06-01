@@ -715,3 +715,387 @@ groupby()	|groups create
 .count()	|non-null values count
 .size()|	total rows count
 
+
+## What is isin() ? 🤔
+it is a method in pandas that checks if each element in a Series is contained in a specified list of values. It returns a boolean Series where True indicates that the element is in the list and False indicates that it is not.
+
+### Simple Example😄
+data.csv
+Name| | city
+Suraj | Delhi
+Aman| mumbai
+Riya| Pune
+
+```python
+import pandas as pd
+df = pd.read_csv('data.csv')
+df['City'].isin(['Delhi', 'Pune'])
+```
+Output 😊
+0 - True
+1 -False
+2 -True
+
+Meaning 🚀
+City In List?
+Delhi| ✅
+Mumbai| ❌
+Pune | ✅
+
+## MOST IMPORTANT 🧠🔥
+### == ->only ONE value check 😄
+company['Sector'] == 'Technology'
+
+### isin() ->MULTIPLE values check 🚀
+company['Sector'].isin(['Technology', 'Retail'])
+
+### Fortune100 Example ->Technology + Retail Companies
+Meaning 🧠Sir bring rows of Technology and Retail sector
+```python
+print(company[company['Sector'].isin(['Technology', 'Retail'])])
+```
+
+### IPL Example -> Virat + Rohit Rows 😄
+Meaning 🚀Just bring the rows where the vlaue is Virat and Rohit
+```python
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])])
+```
+
+STEP 1 : delivery
+Meaning 😄complete IPL dataset
+
+STEP 2 🧠 delivery['batsman']
+Meaning: Just find batsman column
+
+Example 😄
+batsman
+V Kohli
+RG Sharma
+MS Dhoni
+
+STEP 3 🚀🔥 .isin( ['V Kohli', 'RG Sharma'])
+Meaning Check whether the batsman is V Kohli or RG Sharma?
+
+OUTPUT😄🔥
+True
+False
+True
+False
+
+## With groupby 😎🔥Virat + Rohit Total Runs
+```python
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])].groupby('batsman')['batsman_runs'].sum())
+```
+
+Output Example 🏏
+V Kohli      7263
+RG Sharma    6211
+
+Explain: step 1,2,3 are same as above then 
+
+STEP 4 🧠🚀: -> delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma']    )]
+Meaning 😎🔥: Bring only those rows where the value is Kohli or Rohit Sharma.
+
+Example Output 😄🏏
+batsman	batsman_runs
+V Kohli-	4
+RG Sharma	-6
+V Kohli	-1
+
+STEP 5 🧠😎 .groupby('batsman')
+Meaning 😄🔥: Create batsman-wise groups
+
+Groups 🚀=> 
+V Kohli Group 😎batsman_runs
+4
+1
+RG Sharma Group 😄batsman_runs
+6
+
+STEP 6 🧠🔥['batsman_runs']
+Meaning 😎: select only  runs column 
+
+STEP 7  .sum()
+Meaning: add all batsman total runs.
+
+FINAL OUTPUT:
+batsman
+V Kohli      5
+RG Sharma    6
+
+
+## NOT isin() ❌
+Opposite of isin. Technology aur Retail ko hata do
+```python
+~company['Sector'].isin(['Technology', 'Retail'])
+```
+Example 😄🔥
+```python
+print(company[~company['Sector'].isin(['Technology', 'Retail'])])
+```
+
+### Notes
+| Code      | Meaning         |
+| --------- | --------------- |
+| `==`      | single value    |
+| `isin()`  | multiple values |
+| `~isin()` | opposite filter |
+
+### Question:Find the most destructive death-over batsman in IPL history
+Meaning :Death overs means= Over 16 → 20
+         Most destructive = highest strike rate
+
+## Strike Rate Formula 🚀
+Strike Rate =Balls/Runs ​× 100
+
+Condition😄🔥
+Minimum 200 balls played in overs 16-20
+
+
+```python
+death_over = delivery[
+    delivery['over'] > 15
+]
+
+runs = death_over.groupby('batsman')[
+    'batsman_runs'
+].sum()
+
+balls = death_over.groupby('batsman')[
+    'batsman_runs'
+].count()
+
+sr = (runs / balls) * 100
+
+mask = balls >= 200
+
+print(
+    sr[mask]
+    .sort_values(ascending=False)
+    .head(10)
+)
+```
+
+
+## STEP-BY-STEP 🧠🏏
+1️⃣ Death overs filter
+death_over = delivery[
+    delivery['over'] > 15]
+
+Meaning : Only overs 16-20
+
+2️⃣ Group by batsman 🚀
+death_over.groupby('batsman')
+Meaning: group of all batsman 
+
+
+3️⃣ Calculate Strike Rate 🔥
+runs = death_over.groupby('batsman')['batsman_runs'].sum()
+balls = death_over.groupby('batsman')['batsman_runs'].count()
+
+Why count()? 🧠
+1 row = 1 ball
+
+4️⃣ Strike Rate Formula 🚀
+sr = (runs / balls) * 100
+
+5️⃣ Minimum 200 balls 😄🔥
+mask = balls >= 200
+Meaning: Only those batsmen who played 200+ balls
+
+OUTPUT Meaning : Top death-over hitters with best strike rate (minimum 200 balls)
+
+
+IMPORTANT CONCEPTS 🧠🔥
+Code-	Meaning
+over > 15-	death overs
+groupby('batsman')-	batsman groups
+.sum()-	total runs
+.count()	-total balls
+(runs/balls)*100	-strike rate
+balls >= 200	-minimum balls condition
+
+
+# IMPORTANT CONCEPTS 🧠🔥
+
+| Code | Meaning |
+|---|---|
+| over > 15 | death overs |
+| groupby('batsman') | batsman groups |
+| sum() | total runs |
+| count() | total balls |
+| (runs/balls)*100 | strike rate |
+| balls >= 200 | minimum balls condition |
+
+
+Example
+```python
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])].groupby('batsman')['batsman_runs'].sum())
+```
+
+
+STEP 1 🚀
+delivery
+Meaning :complete IPL dataset
+
+
+STEP 2 🧠
+delivery['batsman']
+Meaning : fetch only batsman column 
+
+Example :
+batsman
+V Kohli
+RG Sharma
+MS Dhoni
+
+
+STEP 3 🚀🔥
+.isin(['V Kohli', 'RG Sharma'])
+Meaning : Check: Is the batsman Kohli or Rohit Sharma?
+
+OUTPUT 😄🔥
+True
+False
+True
+False
+
+
+STEP 4 🧠🚀
+delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])]
+Meaning :Retrieve only those rows where the batsman is V Kohli or RG Sharma.
+
+Example Output 😄🏏
+batsman	-batsman_runs
+V Kohli	-4
+RG Sharma	-6
+V Kohli	-1
+
+
+
+STEP 5 🧠😎
+.groupby('batsman')
+Meaning : Now creating batsman-wise groups 
+
+STEP 6 🧠🔥
+['batsman_runs']
+Meaning : only select runs column.
+
+STEP 7 🚀🔥
+.sum()
+Meaning : add all batsman total runs.
+
+FINAL OUTPUT 🏏🔥
+batsman
+V Kohli      5
+RG Sharma    6
+
+## FLOW UNDERSTANDING 🧠🚀
+Dataset
+↓
+Filter players
+↓
+Create groups
+↓
+Select runs column
+↓
+Add runs
+
+
+## What is merge()? 🤔
+join the 2 DataFrames.
+
+### Real-Life Example 😄🔥
+Suppose:
+Table 1 → Students
+id	 → name
+1	→  suraj
+2	→  Aman
+
+Table 2 → Marks
+id→marks
+1→	90
+2→ 80
+
+Goal 🧠🔥
+Importing Names and Marks into a Table
+
+```python
+students = pd.DataFrame({'id': [1, 2],'name': ['Suraj', 'Aman']})
+marks = pd.DataFrame({'id': [1, 2],'marks': [90, 80]})
+print(pd.merge(students, marks, on='id'))
+```
+
+OUTPUT 🚀
+id	name	marks
+1	Suraj	90
+2	Aman	80
+
+
+## TYPES OF MERGE 😎🔥
+Type	Meaning
+inner	common rows only
+left	left table full
+right	right table full
+outer	all rows
+
+
+### INNER MERGE 
+Meaning : only matching rows
+
+```python
+pd.merge(
+    students,
+    marks,
+    on='id',
+    how='inner'
+)
+```
+
+### LEFT MERGE 🧠🔥
+Meaning :all rows of Left table 
+
+```python
+pd.merge(
+    students,
+    marks,
+    on='id',
+    how='left'
+)
+```
+
+### RIGHT MERGE 🚀
+
+```python
+pd.merge(
+    students,
+    marks,
+    on='id',
+    how='right'
+)
+```
+
+### OUTER MERGE 😄🔥
+Meaning: all rows of both tables.
+
+```python
+pd.merge(
+    students,
+    marks,
+    on='id',
+    how='outer'
+)
+```
+
+📘 Notes 😎🔥
+Code	Meaning
+merge()	join DataFrames
+on=''	common column
+how='inner'	matching rows
+how='left'	left full
+how='right'	right full
+how='outer'	all rows
+
+
+
+
