@@ -972,7 +972,6 @@ RG Sharma	-6
 V Kohli	-1
 
 
-
 STEP 5 🧠😎
 .groupby('batsman')
 Meaning : Now creating batsman-wise groups 
@@ -1044,47 +1043,27 @@ outer	all rows
 Meaning : only matching rows
 
 ```python
-pd.merge(
-    students,
-    marks,
-    on='id',
-    how='inner'
-)
+pd.merge(students,marks,on='id',how='inner')
 ```
 
 ### LEFT MERGE 🧠🔥
 Meaning :all rows of Left table 
 
 ```python
-pd.merge(
-    students,
-    marks,
-    on='id',
-    how='left'
-)
+pd.merge(students,marks,on='id',how='left')
 ```
 
 ### RIGHT MERGE 🚀
 
 ```python
-pd.merge(
-    students,
-    marks,
-    on='id',
-    how='right'
-)
+pd.merge(students,marks,on='id',how='right')
 ```
 
 ### OUTER MERGE 😄🔥
 Meaning: all rows of both tables.
 
 ```python
-pd.merge(
-    students,
-    marks,
-    on='id',
-    how='outer'
-)
+pd.merge(students,marks,on='id',how='outer')
 ```
 
 📘 Notes 😎🔥
@@ -1097,5 +1076,268 @@ how='right'	right full
 how='outer'	all rows
 
 
+1️⃣ Virat Kohli ne kis city me sabse jyada runs banaye 😎🔥
+```python
+merge_df = pd.merge(delivery,matches,left_on='match_id', right_on='id')
+print(merge_df[ merge_df['batsman'] == 'V Kohli'].groupby('city')['batsman_runs'].sum().sort_values(ascending=False).head())
+```
+expain: 
+### PART 1 😎pd.merge()
+pd:here pd is nickname of pandas 
+import pandas as pd
 
+merge()
+Meaning:add two DataFrames.
+
+### PART 2 🚀delivery
+First DataFrame
+
+Example:
+match_id  |	batsman	batsman_runs
+1  |	V Kohli	4
+1  |	V Kohli	1
+
+### PART 3 🔥matches
+Second DataFrame
+
+Example:
+id |	city
+1  |	Hyderabad
+
+### PART 4 🧠left_on='match_id'
+Meaning: In Delivery table use match_id column  
+
+
+### PART 5 🚀 right_on='id'
+Meaning:In Matches table use id column 
+
+#### VISUAL UNDERSTANDING 🏏
+Delivery:
+match_id |batsman
+1  |	V Kohli
+↓
+
+Matches:
+id  |	city
+1	|Hyderabad
+↓
+
+Merge:
+match_id  |	batsman	| city
+1	| V Kohli  |	Hyderabad
+
+
+### PART 6: merge_df
+Meaning:New merged dataframe
+
+### PART 7 🚀: merge_df['batsman']
+Meaning: fetch only batsman column 
+Example:
+V Kohli
+MS Dhoni
+RG Sharma
+
+### PART 8 🔥
+merge_df['batsman'] == 'V Kohli'
+Meaning:Check batsman is Virat or not?
+Output:
+True
+False
+True
+False
+
+### PART 9 🧠 : merge_df[merge_df['batsman'] == 'V Kohli']
+Meaning: fetch only Virat Kohli's rows 
+Example:
+batsman	city|	batsman_runs
+V Kohli	Delhi|	4
+V Kohli	Mumbai|	1
+
+### PART 10 🚀 :  .groupby('city')
+Meaning: create group according to city.
+Example:
+Delhi Group
+batsman_runs
+4
+6
+
+Mumbai Group
+batsman_runs
+1
+2
+
+### PART 11 🔥: ['batsman_runs']
+Meaning: only take runs column.
+
+### PART 12 🧠: .sum()
+Meaning: add all city runs.
+Example:
+Delhi -> 4 + 6 = 10
+Mumbai -> 1 + 2 = 3
+
+Output:
+Delhi     10
+Mumbai     3
+
+
+### PART 13 🚀:  .sort_values(ascending=False)
+sort_values()
+Meaning: Sorting
+
+ascending=False
+Meaning:Big → small
+
+Output:
+Delhi     10
+Mumbai     3
+
+### PART 14 🔥.head(5)
+Meaning: show Top 5 rows 
+
+
+
+Example 2️⃣: Kis player ne Hyderabad me sabse jyada runs banaye 😄🔥
+```python
+print(merge_df[    merge_df['city'] == 'Hyderabad'].groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).head(10))
+```
+
+3️⃣ Har season me total matches 😎🚀
+```python
+print(matches.groupby('season').size())
+```
+
+
+4️⃣ Virat Kohli ka har season total runs 🏏🔥
+```python
+print(merge_df[    merge_df['batsman'] == 'V Kohli'].groupby('season')['batsman_runs'].sum().sort_values(ascending=False)).drop_duplicate(subset='season',keep='first')
+```
+
+
+Example :
+```python
+new = delivery.merge(match,left_on='match_id',right_on='id')
+new.groupby(['season', 'batsman'])['batsman_runs'] .sum() .sort_values(ascending=False) .reset_index()
+```
+Explain:
+### STEP 1 🚀: delivery.merge()
+Meaning: join delivery dataframe with another dataframe.
+
+### STEP 2 😎: match
+Second dataframe
+Example:
+id|	season
+1|	2017
+2|	2017
+
+### STEP 3 🔥:left_on='match_id'
+Meaning: use match_id of delivery dataframe 
+
+### STEP 4 🧠: right_on='id'
+Meaning: use id of match dataframe.
+RESULT :
+
+before->
+
+delivery
+match_id|	batsman|	batsman_runs
+1|	V Kohli||	4
+
+match
+id|	season
+1|	2017
+
+after Merge ->
+match_id |	batsman|batsman_runs|	season
+1	     | V Kohli |     4      |   2017
+
+
+### STEP 5 🏏: new.groupby(['season','batsman'])
+Meaning: Season + create groups according to Batsman 
+
+Example:
+Group 1
+2017 + V Kohli
+Group 2
+2018 + V Kohli
+Group 3
+2017 + MS Dhoni
+
+
+### STEP 6 🔥['batsman_runs']
+Meaning: take only runs  column
+
+### STEP 7 🚀 .sum()
+Meaning:Add total runs of group
+
+Example:
+2017 + V Kohli
+4
+6
+2
+1
+↓
+13
+
+Output:
+season | batsman  | total run
+2017   | V Kohli  |    973
+2017   | DA Warner  |  641
+
+
+### STEP 8 😎 : .sort_values(ascending=False)
+Meaning: runs big -> small
+
+Example:
+V Kohli      973
+DA Warner    641
+MS Dhoni     590
+
+### STEP 9 🔥: .reset_index()
+Seasons and batsmen become index.
+
+Before:
+season | batsman   |  run 
+2017   | V Kohli  |    973
+2018   | V Kohli |     530
+
+this is MultiIndex .
+
+After:
+season  | batsman  | batsman_runs
+2017    | V Kohli  |  973
+2018    |V Kohli   |   530
+
+### STEP 10 : drop_duplicates(subset='season', keep='first')
+thsi is very important part.
+
+Before Data
+season|	batsman	|runs
+2016|	V Kohli	|973
+2016|	AB de Villiers|	687
+2016|	DA Warner	|848
+2017|	DA Warner	|641
+2017	|G Gambhir	|498
+
+subset='season'
+Meaning: check Season column
+
+keep='first'
+Meaning:Keep the first row you received.
+
+Since data is already sorted according highest runs then 
+2016 first row: V Kohli 973
+
+The first row stays ✅. Remove the remaining rows from 2016 ❌.
+
+2017 : DA Warner 641 ✅
+
+FINAL OUTPUT 😎🏏
+season	|batsman	|runs
+2016	|V Kohli	|973
+2017	|DA Warner	|641
+2018	|KS Williamson	|735
+2019	|DA Warner	|692
+
+
+and: groupby(['season','batsman'])  =  Multi-Level Grouping 
 

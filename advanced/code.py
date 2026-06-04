@@ -238,6 +238,59 @@ print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])].groupby('bats
 
 ## NOT isin() 
 print(company[~company['Sector'].isin(['Technology', 'Retail'])])
-0
+
+### Question:Find the most destructive death-over batsman in IPL history 
+death_over = delivery[delivery['over'] > 15]
+runs = death_over.groupby('batsman')['batsman_runs'].sum()
+balls = death_over.groupby('batsman')['batsman_runs'].count()
+sr = (runs / balls) * 100
+mask = balls >= 200
+print( sr[mask].sort_values(ascending=False).head(10))
+
+## Example
+print(delivery[delivery['batsman'].isin(['V Kohli', 'RG Sharma'])].groupby('batsman')['batsman_runs'].sum())
+
+## merge()
+students = pd.DataFrame({'id': [1, 2],'name': ['Suraj', 'Aman']})
+marks = pd.DataFrame({'id': [1, 2],'marks': [90, 80]})
+print(pd.merge(students, marks, on='id'))
+
+
+### INNER MERG
+pd.merge(students,marks,on='id',how='inner')
+
+### LEFT MERGE 
+pd.merge(students,marks,on='id',how='left')
+
+### RIGHT MERGE 
+pd.merge(students,marks,on='id',how='right')
+
+### OUTER MERGE 
+pd.merge(students,marks,on='id',how='outer')
+
+
+## Virat Kohli ne kis city me sabse jyada runs banaye 😎🔥
+delivery = pd.read_csv('delivery.csv')
+matches = pd.read_csv('match.csv')
+merge_df = pd.merge(delivery, matches, left_on='match_id', right_on='id')
+print(merge_df[ merge_df['batsman'] == 'V Kohli'].groupby('city')['batsman_runs'].sum().sort_values(ascending=False).head())
+
+
+#Example 2️⃣: Kis player ne Hyderabad me sabse jyada runs banaye 😄🔥
+print(merge_df[    merge_df['city'] == 'Hyderabad'].groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).head(10))
+
+
+#3️⃣ Har season me total matches 😎🚀
+print(matches.groupby('season').size())
+
+
+#4️⃣ Virat Kohli ka har season total runs 🏏🔥
+print(merge_df[merge_df['batsman'] == 'V Kohli'].groupby('season')['batsman_runs'].sum().sort_values(ascending=False)).drop_duplicate(subset='season',keep='first')
+
+
+
+# Example :
+new = delivery.merge(matches,left_on='match_id',right_on='id')
+new.groupby(['season', 'batsman'])['batsman_runs'] .sum() .sort_values(ascending=False) .reset_index()
 
 
