@@ -1338,6 +1338,139 @@ season	|batsman	|runs
 2018	|KS Williamson	|735
 2019	|DA Warner	|692
 
-
 and: groupby(['season','batsman'])  =  Multi-Level Grouping 
+
+## now we have new dataframe name is food.csv
+
+### What is the average amount spent on each food item in every city?
+```python
+print(food.pivot_table(index='City',columns='Item',values='Spends',aggfunc='mean'))
+```
+
+Word-by-Word 🧠
+
+index='City'
+👉 Each city will form a row
+
+columns='Item'
+👉 Each food item will form a column
+
+values='Spends'
+👉 calculate the spends
+
+aggfunc='mean'
+👉 find the average spend
+
+Example Data 😄
+Name	|City	  |Item	    |Spends
+Anu	    |Kolkata  |Burger	|11
+Riya	|Delhi	  |Pizza	|25
+Amit	|Kolkata  |Pizza	|20
+
+Output 🚀
+City	|Burger |Pizza
+Delhi	|NaN	|25
+Kolkata	|11	    |20
+
+Meaning 😎
+Average spend on Burger in Kolkata = 11
+Average spend on Pizza in Kolkata = 20
+Average spend on Pizza in Delhi = 25
+
+
+Notes 📝
+Parameter|	Meaning
+index	|Rows
+columns	|Columns
+values	|Column on which calculation is to be performed
+aggfunc	|Type of calculation to be performed
+
+
+Example 
+```python
+print(food.pivot_table(index=['City'],columns=['Item'],values='Spends',aggfunc='mean'))
+```
+
+Word-by-Word 🧠🔥
+
+### index='City'
+👉 Each city will form a row
+
+###  columns='Item'
+👉 Every food item will create a column.
+
+### values='Spends'
+👉 Expenses have to be calculated
+
+### aggfunc='mean'
+👉 Average spend is calculated
+
+### Example Data 😄
+Name	City	Item	Spends
+Anu	Kolkata	Burger	11
+Riya	Delhi	Pizza	25
+Amit	Kolkata	Pizza	20
+
+Output 🚀
+City	Burger	Pizza
+Delhi	NaN	25
+Kolkata	11	20
+
+###  Meaning 😎
+Average spend of Burger in Kolkata = 11
+Average spend of Pizza in Kolkata = 20
+Average spend of Pizza in Delhi = 25
+
+Notes 📝
+Parameter	Meaning
+index	Rows
+columns	Columns
+values	​​On which column is the calculation done?
+aggfunc Which calculation is being performed?
+
+
+```python
+print(food.pivot_table(index=['City', 'Gender'],columns=['Item', 'Frequency'],values='Spends',aggfunc='mean'))
+```
+
+Word-by-Word
+
+index=['City', 'Gender']
+👉 creating Rows-
+Delhi    F
+Delhi    M
+Kolkata  F
+Kolkata  M
+
+
+columns=['Item', 'Frequency']
+👉 Create Columns :
+Burger Weekly
+Burger Monthly
+Pizza Weekly
+Pizza Monthly
+
+
+values='Spends'
+👉calculation on Spends column.
+
+aggfunc='mean'
+👉 find Average spend.
+
+Example Output 🚀
+City	|Gender	|Burger |weekly 	|Pizza Monthly
+Delhi	|F	           |15	      | 25
+Kolkata	|M	          | 11       |	20
+
+Pivot Table Formula 🏆
+```python
+df.pivot_table(index=[row_groups],columns=[column_groups],values='numeric_column',aggfunc='mean')
+```
+😎 Remember the Rule:
+index   → rows
+columns → columns
+values  → On which the calculation is to be performed
+aggfunc → Which calculation?
+
+
 
