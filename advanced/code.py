@@ -293,4 +293,95 @@ print(merge_df[merge_df['batsman'] == 'V Kohli'].groupby('season')['batsman_runs
 new = delivery.merge(matches,left_on='match_id',right_on='id')
 new.groupby(['season', 'batsman'])['batsman_runs'] .sum() .sort_values(ascending=False) .reset_index()
 
+# Pandas + Seaborn Cheat Sheet 🚀
+
+import pandas as pd
+import seaborn as sns
+
+# -----------------------------
+# 1. PIVOT TABLE
+# -----------------------------
+# Average spend per city and item
+food=pd.read_csv('food.csv')
+food.pivot_table(
+    index='City',
+    columns='Item',
+    values='Spends',
+    aggfunc='mean'
+)
+
+# Multi-index pivot
+food.pivot_table(
+    index=['City', 'Gender'],
+    columns=['Item', 'Frequency'],
+    values='Spends',
+    aggfunc='mean'
+)
+
+# -----------------------------
+# 2. IPL SIXES ANALYSIS
+# -----------------------------
+mask = delivery['batsman_runs'] == 6
+six = delivery[mask]
+
+pt = six.pivot_table(
+    index='over',
+    columns='batting_team',
+    values='batsman_runs',
+    aggfunc='count'
+)
+
+sns.heatmap(pt, annot=True)
+
+# -----------------------------
+# 3. CORRELATION
+# -----------------------------
+match=pd.read_csv('match.csv')
+match.corr(numeric_only=True)
+
+sns.heatmap(match.corr(numeric_only=True), annot=True)
+
+# -----------------------------
+# 4. RENAME COLUMNS
+# -----------------------------
+match.rename(
+    columns={'city': 'place', 'date': 'dom'},
+    inplace=True
+)
+
+# -----------------------------
+# 5. INDEX OPERATIONS
+# -----------------------------
+
+delivery.set_index('id', inplace=True)
+delivery.reset_index(inplace=True)
+delivery.reset_index(drop=True)
+
+# -----------------------------
+# 6. VALUE COUNTS
+# -----------------------------
+delivery['winner'].value_counts().reset_index()
+
+# -----------------------------
+# 7. DROP NA
+# -----------------------------
+delivery.dropna()
+delivery.dropna(axis=1)
+delivery.dropna(how='all')
+delivery.dropna(subset=['Age'])
+delivery.dropna(inplace=True)
+
+# -----------------------------
+# 8. FILL NA
+# -----------------------------
+delivery.fillna(0)
+
+delivery['Age'].fillna(delivery['Age'].mean(), inplace=True)
+
+delivery['Cabin'].fillna('Not Specified', inplace=True)
+
+delivery.fillna(method='ffill')
+delivery.fillna(method='bfill')
+
+
 
