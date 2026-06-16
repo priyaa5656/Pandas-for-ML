@@ -295,8 +295,6 @@ new.groupby(['season', 'batsman'])['batsman_runs'] .sum() .sort_values(ascending
 
 # Pandas + Seaborn Cheat Sheet 🚀
 
-import pandas as pd
-import seaborn as sns
 
 # -----------------------------
 # 1. PIVOT TABLE
